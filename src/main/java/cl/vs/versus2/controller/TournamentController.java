@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,14 +20,14 @@ public class TournamentController {
 
 	@Autowired
 	TournamentRepository tournamentRepository;
-	
+
 	@Autowired
 	TournamentService tournamentService;
-	
+
 	@GetMapping("/admin/addTournament")
 	public String getTournamentForm(Model model) {
 		model.addAttribute(new Tournament());
-		return "admin/allTournament";
+		return "admin/addTournament";
 	}
 
 	@PostMapping("/admin/addTournament")
@@ -38,12 +39,39 @@ public class TournamentController {
 		System.out.println(tournament.getId() + " " + tournament.getName() + " " + tournament.getDescription());
 		return "admin/allTournament";
 	}
-	
+
 	@GetMapping("/admin/allTournament")
 	public ModelAndView allTournamentPage() {
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("allUsersRating", tournamentService.getAllTournament());
+		modelAndView.addObject("allTournament", tournamentService.getAllTournament());
 		return modelAndView;
 	}
-	
+
+	@GetMapping("admin/tournamentDetail/{id}")
+	public String findTournamentDetail(@PathVariable int id, Model model) {
+		model.addAttribute("tournamentDetail", tournamentRepository.findById(id));
+		return "admin/tournamentDetail";
+	}
+
+	@GetMapping("admin/tournamentDetail/edit/{id}")
+	public String editTournament(@PathVariable int id, Model model) {
+		model.addAttribute("tournament", tournamentRepository.findById(id));
+		return "/admin/addTournament";
+	}
+
+	@PostMapping("admin/tournamentDetail/edit/{id}")
+	public String saveEditedTournament(@Valid Tournament tournament, BindingResult result) {
+		if (result.hasErrors()) {
+			return "/admin/addTournament";
+		}
+		tournamentRepository.save(tournament);
+		return "redirect:/admin/allTournament";
+	}
+
+	@GetMapping("admin/tournamentDetail/remove/{id}")
+	public String removeUser(@PathVariable int id) {
+		tournamentRepository.deleteById(id);
+		return "redirect:/admin/allTournament";
+	}
+
 }

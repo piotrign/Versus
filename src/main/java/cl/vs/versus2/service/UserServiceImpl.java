@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
 		System.out.println(allUsers.toString());
 		return allUsers;
 	}
-	
+
 	@Transactional
 	public void updateUser(User entity) {
 		entityManager.merge(entity);

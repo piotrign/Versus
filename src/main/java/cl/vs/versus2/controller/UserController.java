@@ -10,14 +10,20 @@ import cl.vs.versus2.repository.UserRepository;
 
 @Controller
 public class UserController {
-	
+
 	@Autowired
 	UserRepository userRepository;
-	
+
 	@GetMapping("admin/profile/{id}")
 	public String findUserProfile(@PathVariable int id, Model model) {
 		model.addAttribute("userData", userRepository.findById(id));
 		return "admin/profile";
+	}
+
+	@GetMapping("/remove/{id}")
+	public String removeUser(@PathVariable int id) {
+		userRepository.deleteById(id);
+		return "redirect:/user/all";
 	}
 
 }

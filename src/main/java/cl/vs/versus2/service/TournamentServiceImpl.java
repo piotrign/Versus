@@ -11,17 +11,17 @@ import org.springframework.stereotype.Service;
 import cl.vs.versus2.entity.User;
 
 @Service("tournamentService")
-public class TournamentServiceImpl {
+public class TournamentServiceImpl implements TournamentService {
 
 	@PersistenceContext
 	EntityManager entityManager;
-	
-	public List<User> getAllTournaments() {
+
+	public List<User> getAllTournament() {
 		Query query = entityManager.createQuery("SELECT t FROM Tournament t");
 		@SuppressWarnings("unchecked")
 		List<User> allTournaments = query.getResultList();
 		System.out.println(allTournaments.toString());
 		return allTournaments;
 	}
-	
+
 }

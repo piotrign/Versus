@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Tournament Details</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+	<div class="container">
+        <a th:href="@{/admin/ranking}">
+            <button class="btn btn-lg btn-success btn-block">Hall of Fame
+            </button>
+        </a>
+        <a th:href="@{/admin/home}">
+            <button class="btn btn-lg btn-success btn-block">Home Page
+            </button>
+        </a>
+        <a th:href="@{/admin/matchResult}">
+            <button class="btn btn-lg btn-success btn-block">Record battle
+            </button>
+        </a>
+		<form th:action="@{/logout}" method="get">
+			<button class="btn btn-md btn-warning btn-block" name="registration"
+				type="Submit">Logout</button>
+		</form>
+
+		<div class="panel-group" style="margin-top: 40px">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<span th:utext="${tournamentDetail}"></span>
+				</div>
+				<div class="panel-body">
+					<div>
+						<h2>Tournament's details</h2>
+						<table border="1">
+							<tr>
+								<th>ID</th>
+								<th>Name</th>
+								<th>Date of tournament</th>
+								<th>Place of tournament</th>
+								<th>City of tournament</th>
+								<th>Country of tournament</th>
+                                <th>Region of tournament</th>
+                                <th>Description of tournament</th>
+                                <th>Edit tournament</th>
+                                <th>Remove tournament</th>
+							</tr>
+							<tr th:each="tournament: ${tournamentDetail}">
+                                <td th:text="${tournament.id}"></td>
+                                <td th:text="${tournament.name}"></td>
+								<td th:text="${tournament.tournamentDate}"></td>
+								<td th:text="${tournament.tournamentPlace}"></td>
+								<td th:text="${tournament.tournamentCity}"></td>
+								<td th:text="${tournament.tournamentCountry}"></td>
+								<td th:text="${tournament.tournamentRegion}"></td>
+                                <td th:text="${tournament.description}"></td>
+                                <td>
+                                    <a th:href="'admin/tournamentDetail/edit/' + ${tournament.id}">Edit</a>
+                                </td>
+                                <td>
+                                    <a th:href="'/admin/tournamentDetail/remove/' + ${tournament.id}">Delete</a>
+                                </td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</body>
+</html>
