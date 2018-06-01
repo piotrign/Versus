@@ -1,48 +1,64 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<title>Ranking Page</title>
-<link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<title>Ranking Page</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body>
 	<div class="container">
 
 		<form th:action="@{/logout}" method="get">
-			<button class="btn btn-md btn-danger btn-block" name="registration"
-				type="Submit">Logout</button>
+			<button class="btn btn-md btn-warning btn-block" name="registration" type="Submit">Logout</button>
 		</form>
-
+			<a th:href="@{/admin/home} ">
+				<button class="btn btn-md btn-success btn-block ">Home Page
+				</button>
+			</a>
+				<a th:href="@{/admin/matchResult} ">
+					<button class="btn btn-md btn-success btn-block ">Record battle
+					</button>
+				</a>
 		<div class="panel-group" style="margin-top: 40px">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<span th:utext="${userName}"></span>
+					<span <b>
+						<h2>Ranking of players</h2>
+						</b>
+					</span>
 				</div>
 				<div class="panel-body">
 					<div>
-						<h2>Users</h2>
-						<table border="1">
-							<tr>
-								<th>name</th>
-								<th>last name</th>
-								<th>email</th>
-								<th>elo rating</th>
-							</tr>
-							<tr th:each="user: ${allUsersRating}">
-								<td th:text="${user.name}"></td>
-								<td th:text="${user.lastName}"></td>
-								<td th:text="${user.email}"></td>
-								<td th:text="${user.eloRating}"></td>
-							</tr>
+
+						<table class="table .table-dark" class="table table-striped">
+							<thead class="thead-dark">
+								<tr>
+									<th scope = "col">Name</th>
+									<th scope = "col">Last Name</th>
+									<th scope = "col">Email</th>
+									<th scope = "col">Elo Rating</th>
+									<th scope = "col">Player's Profile</th>
+								</tr>
+								<tr th:each="user: ${allUsersRating}">
+									<td th:text="${user.name}"></td>
+									<td th:text="${user.lastName}"></td>
+									<td th:text="${user.email}"></td>
+									<td th:text="${user.eloRating}"></td>
+									<td>
+										<a th:href="'/admin/profile/' + ${user.id}">See more</a>
+									</td>
+								</tr>
+							</thead>
 						</table>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	
 </body>
+
 </html>

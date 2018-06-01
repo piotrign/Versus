@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Tournament Registration Form</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<!--Date picker-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"
+	/>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+	<link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
+</head>
+
+<body>
+	<div class="container">
+		<a th:href="@{/admin/ranking}">
+			<button class="btn btn-lg btn-success btn-block">Hall of Fame
+			</button>
+		</a>
+		<a th:href="@{/admin/matchResult}">
+			<button class="btn btn-lg btn-success btn-block">Record battle
+			</button>
+		</a>
+		<a th:href="@{/admin/matchResult}">
+			<button class="btn btn-lg btn-success btn-block">New tournament
+			</button>
+		</a>
+		<div class="text-right">
+			<form th:action="@{/logout}" method="get" align="right">
+				<button class="btn btn-lg btn-warning" name="registration" type="Submit">Logout</button>
+			</form>
+		</div>
+
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-md-offset-3">
+					<form autocomplete="off" action="#" th:action="@{/admin/addTournament}" th:object="${tournament}" method="post" class="form-horizontal"
+					 role="form">
+						<h2>Tournament Registration Form</h2>
+						<div class="bootstrap-iso">
+							<div class="container-fluid">
+								<div class="row">
+									<div class="col-md-6 col-sm-6 col-xs-12">
+										<form autocomplete="off" action="#" th:action="@{/admin/addTournament}"
+										th:object="${tournament}" method="post" class="form-horizontal"
+										role="form">
+											<div class="form-group ">
+												<label class="control-label " for="name">
+													Name
+												</label>
+												<input th:field="*{name}" class="form-control" id="name" name="name" type="text" />
+											</div>
+											<div class="form-group ">
+												<label class="control-label " for="date">
+													Date of tournament
+												</label>
+												<div class="input-group">
+													<div class="input-group-addon">
+														<i class="fa fa-calendar">
+														</i>
+													</div>
+													<input th:field="*{tournamentDate}" class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text" />
+												</div>
+											</div>
+											<div class="form-group ">
+												<label class="control-label " for="message">
+													Description of event
+												</label>
+												<textarea th:field="*{description}" class="form-control" cols="40" id="message" name="message" rows="10"></textarea>
+											</div>
+											<div class="form-group ">
+												<label class="control-label " for="tournamentPlace">
+													Place of tournament
+												</label>
+												<input th:field="*{tournamentPlace}" class="form-control" id="tournamentPlace" name="tournamentPlace" type="text" />
+											</div>
+											<div class="form-group ">
+												<label class="control-label " for="tournamentCity">
+													City of tournament
+												</label>
+												<input th:field="*{tournamentCity}" class="form-control" id="tournamentCity" name="tournamentCity" type="text" />
+											</div>
+											<div class="form-group ">
+												<label class="control-label " for="tournamentCountry">
+													Country of tournament
+												</label>
+												<input th:field="*{tournamentCountry}" class="form-control" id="tournamentCountry" name="tournamentCountry" type="text" />
+											</div>
+											<div class="form-group ">
+												<label class="control-label " for="tournamentRegion">
+													Select tournament region
+												</label>
+												<select th:field="*{tournamentRegion}" class="select form-control" id="tournamentRegion" name="tournamentRegion">
+													<option value="Europe">
+														Europe
+													</option>
+													<option value="Asia and Oceania">
+														Asia and Oceania
+													</option>
+													<option value="Americas">
+														Americas
+													</option>
+													<option value="Africa">
+														Africa
+													</option>
+												</select>
+											</div>
+											<div class="form-group">
+												<div class="form-group">
+													<div class="col-sm-9">
+														<button type="submit" class="btn btn-primary btn-block">Register Tournament</button>
+													</div>
+												</div>
+										</form>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<script>
+								$(document).ready(function () {
+									var date_input = $('input[name="date"]');
+									var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+									date_input.datepicker({
+										format: 'mm/dd/yyyy',
+										container: container,
+										todayHighlight: true,
+										autoclose: true,
+									})
+								})
+							</script>
+
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Ranking Page</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+	<div class="container">
+
+		<form th:action="@{/logout}" method="get">
+			<button class="btn btn-md btn-warning btn-block" name="registration"
+				type="Submit">Logout</button>
+		</form>
+
+		<div class="panel-group" style="margin-top: 40px">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<span th:utext="${userName}"></span>
+				</div>
+				<div class="panel-body">
+					<div>
+						<h2>Users</h2>
+						<table border="1">
+							<tr>
+								<th>ID</th>
+								<th>Name</th>
+								<th>Last name</th>
+								<th>Email</th>
+								<th>Elo rating</th>
+								<th>Wins</th>
+								<th>Loses</th>
+							</tr>
+							<tr th:each="user: ${userData}">
+								<td th:text="${user.id}"></td>
+								<td th:text="${user.name}"></td>
+								<td th:text="${user.lastName}"></td>
+								<td th:text="${user.email}"></td>
+								<td th:text="${user.eloRating}"></td>
+								<td th:text="${user.wins}"></td>
+								<td th:text="${user.loses}"></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<a th:href="@{/admin/ranking}">
+		<button class="btn btn-lg btn-success btn-block">Hall of Fame
+		</button>
+	</a>
+	<a th:href="@{/admin/home}">
+		<button class="btn btn-lg btn-success btn-block">Home Page
+		</button>
+	</a>
+	<a th:href="@{/admin/matchResult}">
+		<button class="btn btn-lg btn-success btn-block">Record battle
+		</button>
+	</a>
+</body>
+</html>
