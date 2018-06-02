@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import cl.vs.versus2.entity.Tournament;
+import cl.vs.versus2.entity.User;
 import cl.vs.versus2.repository.TournamentRepository;
 import cl.vs.versus2.service.TournamentService;
 
@@ -56,13 +57,13 @@ public class TournamentController {
 	@GetMapping("admin/tournamentDetail/edit/{id}")
 	public String editTournament(@PathVariable int id, Model model) {
 		model.addAttribute("tournament", tournamentRepository.findById(id));
-		return "/admin/addTournament";
+		return "/admin/editTournament";
 	}
 
-	@PostMapping("admin/tournamentDetail/edit/{id}")
+	@PostMapping("admin/tournamentDetail/edit")
 	public String saveEditedTournament(@Valid Tournament tournament, BindingResult result) {
 		if (result.hasErrors()) {
-			return "/admin/addTournament";
+			return "/admin/editTournament";
 		}
 		tournamentRepository.save(tournament);
 		return "redirect:/admin/allTournament";
@@ -74,4 +75,12 @@ public class TournamentController {
 		return "redirect:/admin/allTournament";
 	}
 
+//	@GetMapping("admin/tournamentDetail/attend")
+//	public String assignParticipant(User user, Tournament tournament, Model model) {
+//		tournament.
+//		
+//		
+//		return "redirect:/admin/allTournament";
+//	}
+	
 }

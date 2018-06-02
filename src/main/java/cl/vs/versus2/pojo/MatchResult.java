@@ -8,17 +8,14 @@ public class MatchResult {
 	public String getEmailWinner() {
 		return emailWinner;
 	}
-	
 	public void setEmailWinner(String emailWinner) {
 		this.emailWinner = emailWinner;
 	}
-
 	public String getEmailDefeated() {
 		return emailDefeated;
 	}
-
 	public void setEmailDefeated(String emailDefeated) {
 		this.emailDefeated = emailDefeated;
 	}
-	
+		
 }
