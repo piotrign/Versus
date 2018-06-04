@@ -4,39 +4,65 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Match result</title>
-	<!-- <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" /> -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+	 crossorigin="anonymous">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+	 crossorigin="anonymous"></script>
 </head>
 
-<body>
-	<form th:action="@{/admin/home}" method="get">
-		<button class="btn btn-md btn-warning btn-block">Go To Home Page</button>
-	</form>
+<body class="bg-dark text-white">
+	<div class="row">
+		<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+
+			<div class="btn-group mr-2" role="group" aria-label="First group">
+				<a th:href="@{/admin/home}">
+					<button type="button" class="btn btn-secondary btn-lg">Main
+					</button>
+				</a>
+				<a th:href="@{/admin/ranking}">
+					<button type="button" class="btn btn-secondary btn-lg">Hall of Fame
+					</button>
+				</a>
+				<a th:href="@{/admin/matchResult}">
+					<button type="button" class="btn btn-secondary btn-lg">Record Battle
+					</button>
+				</a>
+				<a th:href="@{/admin/addTournament}">
+					<button type="button" class="btn btn-secondary btn-lg">New Tournament
+					</button>
+				</a>
+				<a th:href="@{/admin/allTournament}">
+					<button type="button" class="btn btn-secondary btn-lg">Tournaments
+					</button>
+				</a>
+				<form th:action="@{/logout}" method="get">
+					<button class="btn btn-lg btn-warning float-xl-right" name="registration" type="Submit">Logout</button>
+				</form>
+			</div>
+		</div>
+	</div>
 
 	<div class="container">
-		<h1>Provide player e-mails</h1>
-		<form id = "matchResult" th:action="@{/admin/matchResult}" th:object="${matchResult}" method="post" class="form-signin">
-			<h3 class="form-signin-heading" th:text="Welcome"></h3>
-			<br>
-			Win:
-			<br>
-			<input type="text" th:field="*{emailWinner}" th:placeholder="Winner" class="form-control" /> <br>
-			Defeat:
-			<input type="text" th:field="*{emailDefeated}" th:placeholder="Defeated" class="form-control" /> <br />
+		<div class="row">
+			<h1 class="text-center" style="margin-top: 40px">Provide player e-mails</h1>
+			<form id="matchResult" th:action="@{/admin/matchResult}" th:object="${matchResult}" method="post" class="form-signin">
+				<h3 class="form-signin-heading" style="margin-top: 80px"></h3>
+				<br> Win:
+				<br>
+				<input type="text" th:field="*{emailWinner}" th:placeholder="Winner" class="form-control" />
+				<br> Defeat:
+				<input type="text" th:field="*{emailDefeated}" th:placeholder="Defeated" class="form-control" />
+				<br />
 
-			<div align="center" th:if="${param.error}">
-				<p style="font-size: 20; color: #FF1C19;">Email/s invalid, please verify</p>
-			</div>
+				<div align="center" th:if="${param.error}">
+					<p style="font-size: 20; color: #FF1C19;">Email/s invalid, please verify</p>
+				</div>
 
-			<button class="btn btn-md btn-primary btn-block" name="Submit" value="Save" type="Submit" th:text="Save"></button>
-			<br>
-			<a th:href="@{/admin/ranking}"><button class="btn btn-md btn-primary btn-block" >Go to hall of fame</button></a>
-		</form>
-
-	</div>
+				<button class="btn btn-md btn-primary btn-block" name="Submit" value="Save" type="Submit" th:text="Save"></button>
+				<br>
+			</form>
+		</div>
 </body>
 
 </html>

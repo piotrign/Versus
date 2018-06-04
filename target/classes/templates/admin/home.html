@@ -2,54 +2,62 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<title>Admin Page</title>
-	<!-- <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" /> -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<style>
-		body {
-			background: rgb(34, 34, 34);
-		}
-	</style>
+  <title>Admin Welcome Page</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+    crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+    crossorigin="anonymous"></script>
 </head>
 
-<body>
-	<div class="container">
-				<a th:href="@{/admin/ranking}">
-					<button class="btn btn-lg btn-success btn-block">Hall of Fame
-					</button>
-				</a>
-				<a th:href="@{/admin/matchResult}">
-					<button class="btn btn-lg btn-success btn-block">Record battle
-					</button>
-				</a>
-					<a th:href="@{/admin/addTournament}">
-						<button class="btn btn-lg btn-success btn-block">New tournament
-						</button>
-					</a>
-					<a th:href="@{/admin/allTournament}">
-						<button class="btn btn-lg btn-success btn-block">See all tournaments
-						</button>
-					</a>
-			<div class="text-right">
-				<form th:action="@{/logout}" method="get" align="right">
-					<button class="btn btn-lg btn-warning" name="registration" type="Submit">Logout</button>
-				</form>
-			</div>
+<body class="bg-dark text-white">
+  <div class="row">
+    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
 
-		<div class="panel-group" style="margin-top: 40px">
-			<div class="panel panel-primary">
-				<div class="panel-heading">
-					<span th:utext="${userName}"></span>
-				</div>
-				<div class="panel-body">
-					<h1>Welcome to the Versus application, to start please select one of the above.</h1>
-				</div>
-				<p class="admin-message-text text-center" th:utext="${adminMessage}"></p>
-			</div>
-		</div>
-	</div>
+      <div class="btn-group mr-2" role="group" aria-label="First group">
+        <a th:href="@{/admin/ranking}">
+          <button type="button" class="btn btn-secondary btn-lg">Hall of Fame
+          </button>
+        </a>
+        <a th:href="@{/admin/matchResult}">
+          <button type="button" class="btn btn-secondary btn-lg">Record Battle
+          </button>
+        </a>
+        <a th:href="@{/admin/addTournament}">
+          <button type="button" class="btn btn-secondary btn-lg">New Tournament
+          </button>
+        </a>
+        <a th:href="@{/admin/allTournament}">
+          <button type="button" class="btn btn-secondary btn-lg">Tournaments
+          </button>
+        </a>
+          <form th:action="@{/logout}" method="get">
+            <button class="btn btn-lg btn-warning float-xl-right" name="registration" type="Submit">Logout</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-12 col-md-4" align="left">
+      <img th:src="@{/img/nagash.png}" class="img-rounded" alt="nagash" />
+    </div>
+    <div class="col-12 col-md-8">
+      <div class="panel-group" align="left">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <span th:utext="${userName}"></span>
+          </div>
+          <div class="panel-body">
+            <h1>Welcome to the Versus application.</h1>
+          </div>
+          <p class="admin-message-text text-center" th:utext="${adminMessage}"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
 
 </body>
 

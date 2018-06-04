@@ -1,8 +1,12 @@
 package cl.vs.versus2.repository;
 
+import java.awt.print.Book;
+import java.util.Set;
+
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import cl.vs.versus2.entity.Tournament;

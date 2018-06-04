@@ -10,4 +10,5 @@ public interface UserService {
 		public void saveUser(User user);
 		public List<User> getAllUsers();
 		public void updateUser(User entity);
+		public User getLoggedUser();
 	}

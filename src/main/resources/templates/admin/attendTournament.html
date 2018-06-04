@@ -2,12 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<title>Tournamanets Page</title>
+	<meta charset="UTF-8">
+	<title>Match result</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
 	 crossorigin="anonymous">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
 	 crossorigin="anonymous"></script>
+
 </head>
 
 <body class="bg-dark text-white">
@@ -42,49 +44,48 @@
 		</div>
 	</div>
 
-	<div class="row">
-		<div class="panel-group" style="margin-top: 40px">
-			<div class="panel panel-primary" style="margin-left: 10px">
-				<div class="panel-heading">
-					<span>
-						<b>
-							<h2 style="margin-left: 20px">All tournaments</h2>
-						</b>
-					</span>
-				</div>
-				<div class="col-md-2 col-md-offset-5">
-					<div class="panel-body">
-						<div>
+	<div class="container">
+		<div class="row">
+			<h3>Tournament info</h3>
+			<table class="table" class="table table-striped">
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col">Id</th>
+						<th scope="col">Name</th>
+						<th scope="col">Tournament Date</th>
+					</tr>
+					<tr th:each="tournament: ${tournament}">
+						<td th:text="${tournament.id}"></td>
+						<td th:text="${tournament.name}"></td>
+						<td th:text="${tournament.tournamentDate}"></td>
+					</tr>
+				</thead>
+			</table>
+			<br>
+			<br>
+			<form id="tournamentEmail" th:action="@{/admin/tournamentDetail/attend/}" th:object="${tournamentEmail}" method="post" class="form-signin">
 
-							<table class="table" class="table table-striped">
-								<thead class="thead-dark">
-									<tr>
-										<th scope="col">Name</th>
-										<th scope="col">Tournament Date</th>
-										<th scope="col">Tournament Place(venue)</th>
-										<th scope="col">Tournament City</th>
-										<th scope="col">Tournament Country</th>
-										<th scope="col">Tournament Details</th>
-									</tr>
-									<tr th:each="tournament: ${allTournament}">
-										<td th:text="${tournament.name}"></td>
-										<td th:text="${tournament.tournamentDate}"></td>
-										<td th:text="${tournament.tournamentPlace}"></td>
-										<td th:text="${tournament.tournamentCity}"></td>
-										<td th:text="${tournament.tournamentCountry}"></td>
-										<td>
-											<a th:href="'/admin/tournamentDetail/' + ${tournament.id}">See more</a>
-										</td>
-									</tr>
-								</thead>
-							</table>
-						</div>
-					</div>
+				<h3 class="form-signin-heading" style="margin-top: 40px"></h3>
+
+				Provide participant e-mail to sign up for tournament:
+				<br>
+				<input type="text" th:field="*{email}" th:placeholder="email" class="form-control" />
+				<br />
+				<br>
+				<div style="visibility: hidden" class="form-group">
+					<input type="text" th:field="*{tournamentId}" th:placeholder="id" class="form-control" />
 				</div>
-			</div>
+				<br />
+
+
+				<div align="center" th:if="${param.error}">
+					<p style="font-size: 20; color: #FF1C19;">Email/s invalid, please verify</p>
+				</div>
+
+				<button class="btn btn-md btn-primary btn-block" name="Submit" value="Save" type="Submit" th:text="Save"></button>
+				<br>
+			</form>
 		</div>
-	</div>
-
 </body>
 
 </html>

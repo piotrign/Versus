@@ -1,76 +1,100 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<title>Tournament Details</title>
-<link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <title>Tournament Details</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+    crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+    crossorigin="anonymous"></script>
 </head>
 
-<body>
-	<div class="container">
-        <a th:href="@{/admin/ranking}">
-            <button class="btn btn-lg btn-success btn-block">Hall of Fame
-            </button>
-        </a>
+<body class="bg-dark text-white">
+  <div class="row">
+    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+
+      <div class="btn-group mr-2" role="group" aria-label="First group">
         <a th:href="@{/admin/home}">
-            <button class="btn btn-lg btn-success btn-block">Home Page
-            </button>
+          <button type="button" class="btn btn-secondary btn-lg">Main
+          </button>
+        </a>
+        <a th:href="@{/admin/ranking}">
+          <button type="button" class="btn btn-secondary btn-lg">Hall of Fame
+          </button>
         </a>
         <a th:href="@{/admin/matchResult}">
-            <button class="btn btn-lg btn-success btn-block">Record battle
-            </button>
+          <button type="button" class="btn btn-secondary btn-lg">Record Battle
+          </button>
         </a>
-		<form th:action="@{/logout}" method="get">
-			<button class="btn btn-md btn-warning btn-block" name="registration"
-				type="Submit">Logout</button>
-		</form>
+        <a th:href="@{/admin/addTournament}">
+          <button type="button" class="btn btn-secondary btn-lg">New Tournament
+          </button>
+        </a>
+        <a th:href="@{/admin/allTournament}">
+          <button type="button" class="btn btn-secondary btn-lg">Tournaments
+          </button>
+        </a>
+        <form th:action="@{/logout}" method="get">
+          <button class="btn btn-lg btn-warning float-xl-right" name="registration" type="Submit">Logout</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="panel-group" style="margin-top: 40px">
+      <div class="panel panel-primary" style="margin-left: 10px">
+        <div class="panel-heading">
+        </div>
+        <div class="panel-body">
+          <div>
+            <h2 style="margin-left: 10px">Tournament details</h2>
+            <table class="table .table-dark" class="table table-striped">
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Date of tournament</th>
+                <th>Place of tournament</th>
+                <th>City of tournament</th>
+                <th>Country of tournament</th>
+                <th>Region of tournament</th>
+                <th>Description of tournament</th>
+                <th>Sign up for tournament</th>
+                <th>Edit tournament</th>
+                <th>Remove tournament</th>
+              </tr>
+              <tr th:each="tournament: ${tournamentDetail}">
+                <td th:text="${tournament.id}"></td>
+                <td th:text="${tournament.name}"></td>
+                <td th:text="${tournament.tournamentDate}"></td>
+                <td th:text="${tournament.tournamentPlace}"></td>
+                <td th:text="${tournament.tournamentCity}"></td>
+                <td th:text="${tournament.tournamentCountry}"></td>
+                <td th:text="${tournament.tournamentRegion}"></td>
+                <td th:text="${tournament.description}"></td>
+                <td>
+                  <a th:href="'/admin/tournamentDetail/attend/' + ${tournament.id}">
+                    <button class="btn btn-secondary">Sign up</button>
+                  </a>
+                </td>
+                <td>
+                  <a th:href="'/admin/tournamentDetail/edit/' + ${tournament.id}">
+                    <button class="btn btn-secondary">Edit</button>
+                  </a>
+                </td>
+                <td>
+                  <a th:href="'/admin/tournamentDetail/remove/' + ${tournament.id}">
+                    <button class="btn btn-secondary">Delete</button>
+                  </a>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-		<div class="panel-group" style="margin-top: 40px">
-			<div class="panel panel-primary">
-				<div class="panel-heading">
-					<span th:utext="${tournamentDetail}"></span>
-				</div>
-				<div class="panel-body">
-					<div>
-						<h2>Tournament's details</h2>
-						<table border="1">
-							<tr>
-								<th>ID</th>
-								<th>Name</th>
-								<th>Date of tournament</th>
-								<th>Place of tournament</th>
-								<th>City of tournament</th>
-								<th>Country of tournament</th>
-                                <th>Region of tournament</th>
-                                <th>Description of tournament</th>
-                                <th>Edit tournament</th>
-                                <th>Remove tournament</th>
-							</tr>
-							<tr th:each="tournament: ${tournamentDetail}">
-                                <td th:text="${tournament.id}"></td>
-                                <td th:text="${tournament.name}"></td>
-								<td th:text="${tournament.tournamentDate}"></td>
-								<td th:text="${tournament.tournamentPlace}"></td>
-								<td th:text="${tournament.tournamentCity}"></td>
-								<td th:text="${tournament.tournamentCountry}"></td>
-								<td th:text="${tournament.tournamentRegion}"></td>
-                                <td th:text="${tournament.description}"></td>
-                                <td>
-                                    <a th:href="'/admin/tournamentDetail/edit/' + ${tournament.id}">Edit</a>
-                                </td>
-                                <td>
-                                    <a th:href="'/admin/tournamentDetail/remove/' + ${tournament.id}">Delete</a>
-                                </td>
-							</tr>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	
 </body>
+
 </html>
