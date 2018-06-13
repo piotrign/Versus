@@ -74,11 +74,12 @@ public class TournamentController {
 		if (result.hasErrors()) {
 			return "/admin/editTournament";
 		}
+		System.out.println(tournament.getId() + " " + tournament.getName() + " " + tournament.getDescription());
 		tournamentRepository.save(tournament);
 		return "redirect:/admin/allTournament";
 	}
 
-	@DeleteMapping("admin/tournamentDetail/remove/{id}")
+	@GetMapping("admin/tournamentDetail/remove/{id}")
 	public String removeUser(@PathVariable int id) {
 		tournamentRepository.deleteById(id);
 		return "redirect:/admin/allTournament";
