@@ -70,12 +70,12 @@
 									th:object="${tournament}" method="post" class="form-horizontal"
 									role="form">
 									<div style="visibility: hidden" class="form-group">
-										<input th:field="*{id}" class="form-control" id="name"
-											name="name" type="text" />
+										<input th:field="*{id}" class="form-control" id="id" name="id"
+											type="text" />
 									</div>
 									<div style="visibility: hidden" class="form-group">
 										<input th:field="*{created}" class="form-control" id="created"
-											name="created" type="date" />
+											name="created" type="text" />
 									</div>
 									<div class="form-group ">
 										<label class="control-label " for="name"> Name </label> <input
@@ -128,6 +128,7 @@
 											<option value="Africa">Africa</option>
 										</select>
 									</div>
+
 									<div class="form-group">
 										<div class="form-group">
 											<button type="submit" class="btn btn-primary btn-block">Save
@@ -144,7 +145,7 @@
 		</div>
 	</div>
 
-	<script>
+	<!--  <script>
 		$(document).ready(
 				function() {
 					var date_input = $('input[name="date"]');
@@ -157,7 +158,7 @@
 						autoclose : true,
 					})
 				})
-	</script>
+	</script>-->
 </body>
 
 </html>
