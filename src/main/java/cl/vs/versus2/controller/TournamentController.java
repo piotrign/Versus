@@ -43,10 +43,11 @@ public class TournamentController {
 	@PostMapping("/admin/addTournament")
 	public String processTournamentForm(@Valid Tournament tournament, BindingResult result) {
 		if (result.hasErrors()) {
+			System.out.println("error for adding tournamen");
 			return "admin/addTournament";
 		}
 		tournamentRepository.save(tournament);
-		System.out.println(tournament.getId() + " " + tournament.getName() + " " + tournament.getDescription());
+		System.out.println(tournament.getId() + " " + tournament.getName() + " " + tournament.getDescription() + " " + tournament.getTournamentDate());
 		return "admin/allTournament";
 	}
 

@@ -32,7 +32,6 @@ public class Tournament {
 	@NotEmpty(message = "*Please provide name of tournament")
 	private String name;
 	
-	@DateTimeFormat(pattern = "dd/mm/yyyy")
 	@Column(name = "date_of_tournament")
 	private Date tournamentDate;
 	
