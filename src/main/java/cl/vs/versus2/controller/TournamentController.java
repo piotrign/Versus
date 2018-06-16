@@ -73,7 +73,7 @@ public class TournamentController {
 	@PostMapping("admin/tournamentDetail/edit")
 	public String saveEditedTournament(@Valid Tournament tournament, BindingResult result) {
 		if (result.hasErrors()) {
-			System.out.println("form error");
+			System.out.println("form edit error");
 			return "/admin/editTournament";
 		}
 		System.out.println(tournament.getId() + " " + tournament.getName() + " " + tournament.getDescription());

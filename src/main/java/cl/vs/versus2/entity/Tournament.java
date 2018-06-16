@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,11 +14,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
 @Table(name = "tournament")
@@ -30,8 +35,10 @@ public class Tournament {
 	
 	@Column(name = "name")
 	@NotEmpty(message = "*Please provide name of tournament")
+	@Size(max=100)
 	private String name;
 	
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "date_of_tournament")
 	private Date tournamentDate;
 	
@@ -47,14 +54,19 @@ public class Tournament {
 	@Column(name = "tournament_region")
 	private String tournamentRegion;
 	
+	@Size(max=255)
 	private String description;
 	
 	@CreationTimestamp
+	@DateTimeFormat(iso=ISO.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date created;
 	
 	@UpdateTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date updated;
 	
+	@ElementCollection
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "tournament_participant", joinColumns = @JoinColumn(name = "user_id"))
 	private Set<User> participant;
