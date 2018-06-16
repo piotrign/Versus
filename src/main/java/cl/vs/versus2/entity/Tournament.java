@@ -38,7 +38,7 @@ public class Tournament {
 	@Size(max=100)
 	private String name;
 	
-	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Column(name = "date_of_tournament")
 	private Date tournamentDate;
 	
@@ -58,12 +58,10 @@ public class Tournament {
 	private String description;
 	
 	@CreationTimestamp
-	@DateTimeFormat(iso=ISO.DATE)
-	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date created;
 	
 	@UpdateTimestamp
-	@Temporal(TemporalType.TIMESTAMP)
 	private Date updated;
 	
 	@ElementCollection

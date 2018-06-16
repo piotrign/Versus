@@ -58,6 +58,9 @@ public class TournamentController {
 		return modelAndView;
 	}
 
+	/** 
+	 * Cokolwiek moja piekna dokumentacja
+	 * */
 	@GetMapping("admin/tournamentDetail/{id}")
 	public String findTournamentDetail(@PathVariable int id, Model model) {
 		model.addAttribute("tournamentDetail", tournamentRepository.findById(id));
@@ -72,10 +75,12 @@ public class TournamentController {
 
 	@PostMapping("admin/tournamentDetail/edit")
 	public String saveEditedTournament(@Valid Tournament tournament, BindingResult result) {
-		if (result.hasErrors()) {
-			System.out.println("form edit error");
-			return "/admin/editTournament";
-		}
+//		TODO: consider error handling
+//		if (result.hasErrors()) {
+//			System.out.println("form edit error");
+//			System.out.println(result.getFieldErrors(field));
+//			return "/admin/editTournament";
+//		}
 		System.out.println(tournament.getId() + " " + tournament.getName() + " " + tournament.getDescription());
 		tournamentRepository.save(tournament);
 		return "redirect:/admin/allTournament";
