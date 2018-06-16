@@ -64,9 +64,6 @@ public class User {
 	private int wins = 0;
 	private int loses = 0;
 
-	@ManyToMany(mappedBy = "participant")
-	private List<Tournament> tournament = new ArrayList<>();
-
 	@CreationTimestamp
 	private Date created;
 

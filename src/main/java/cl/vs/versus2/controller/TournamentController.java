@@ -59,7 +59,7 @@ public class TournamentController {
 	}
 
 	/** 
-	 * Cokolwiek moja piekna dokumentacja
+	 * Below controller displays details of tournament.
 	 * */
 	@GetMapping("admin/tournamentDetail/{id}")
 	public String findTournamentDetail(@PathVariable int id, Model model) {
@@ -108,12 +108,12 @@ public class TournamentController {
 		String participantEmail = tournamentEmail.getEmail();
 
 		Tournament tournament = tournamentRepository.findById(tournamentId);
-		Set<User> tournamentParticipants = tournament.getParticipant();
+		Set<String> tournamentParticipants = tournament.getParticipant();
 
-		User participant = userRepository.findByEmail(tournamentEmail.getEmail());
-		tournamentParticipants.add(participant);
-		System.out.println(participant.getName());
-
+		tournamentParticipants.add(participantEmail);
+		tournament.setParticipant(tournamentParticipants);
+		System.out.println(tournamentParticipants.toString());
+		tournamentRepository.save(tournament);
 		return "redirect:/admin/allTournament";
 	}
 

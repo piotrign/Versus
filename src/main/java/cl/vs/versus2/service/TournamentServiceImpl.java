@@ -43,7 +43,7 @@ public class TournamentServiceImpl implements TournamentService {
 	public void addUserToTournament(Tournament tournament, User user){
 		user = userRepository.findById(user.getId());
 		
-		Set<User> tournamentParticipants = new HashSet<User>();
+		Set<String> tournamentParticipants = new HashSet<>();
 		tournament.setParticipant(tournamentParticipants);
 		
 	}

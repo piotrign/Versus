@@ -65,9 +65,7 @@ public class Tournament {
 	private Date updated;
 	
 	@ElementCollection
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "tournament_participant", joinColumns = @JoinColumn(name = "user_id"))
-	private Set<User> participant;
+	private Set<String> participant;
 
 	public int getId() {
 		return id;
@@ -125,13 +123,6 @@ public class Tournament {
 		this.updated = updated;
 	}
 
-	public Set<User> getParticipant() {
-		return participant;
-	}
-
-	public void setParticipant(Set<User> participant) {
-		this.participant = participant;
-	}
 
 	public String getTournamentCountry() {
 		return tournamentCountry;
@@ -155,6 +146,14 @@ public class Tournament {
 
 	public void setTournamentCity(String tournamentCity) {
 		this.tournamentCity = tournamentCity;
+	}
+
+	public Set<String> getParticipant() {
+		return participant;
+	}
+
+	public void setParticipant(Set<String> participant) {
+		this.participant = participant;
 	}
 	
 }
