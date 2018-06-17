@@ -34,23 +34,30 @@ public class TournamentController {
 	@Autowired
 	UserRepository userRepository;
 
+	/** 
+	 * Below controller displays form to add a new tournament.
+	 * */
 	@GetMapping("/admin/addTournament")
 	public String getTournamentForm(Model model) {
 		model.addAttribute(new Tournament());
 		return "admin/addTournament";
 	}
 
+	/** 
+	 * Below controller processes form to add a new tournament.
+	 * */
 	@PostMapping("/admin/addTournament")
 	public String processTournamentForm(@Valid Tournament tournament, BindingResult result) {
 		if (result.hasErrors()) {
-			System.out.println("error for adding tournamen");
 			return "admin/addTournament";
 		}
 		tournamentRepository.save(tournament);
-		System.out.println(tournament.getId() + " " + tournament.getName() + " " + tournament.getDescription() + " " + tournament.getTournamentDate());
-		return "admin/allTournament";
+		return "redirect:/admin/allTournament";
 	}
 
+	/** 
+	 * Below controller displays all tournaments stored in the database.
+	 * */
 	@GetMapping("/admin/allTournament")
 	public ModelAndView allTournamentPage() {
 		ModelAndView modelAndView = new ModelAndView();
@@ -59,7 +66,7 @@ public class TournamentController {
 	}
 
 	/** 
-	 * Below controller displays details of tournament.
+	 * Below controller displays details of tournament of provided id.
 	 * */
 	@GetMapping("admin/tournamentDetail/{id}")
 	public String findTournamentDetail(@PathVariable int id, Model model) {
@@ -67,12 +74,18 @@ public class TournamentController {
 		return "admin/tournamentDetail";
 	}
 
+	/** 
+	 * Below controller displays form to edit a tournament of provided id.
+	 * */
 	@GetMapping("admin/tournamentDetail/edit/{id}")
 	public String editTournament(@PathVariable int id, Model model) {
 		model.addAttribute("tournament", tournamentRepository.findById(id));
 		return "/admin/editTournament";
 	}
-
+	
+	/** 
+	 * Below controller displays form to process a tournament.
+	 * */
 	@PostMapping("admin/tournamentDetail/edit")
 	public String saveEditedTournament(@Valid Tournament tournament, BindingResult result) {
 //		TODO: consider error handling
@@ -86,12 +99,19 @@ public class TournamentController {
 		return "redirect:/admin/allTournament";
 	}
 
+	/** 
+	 * Below controller removes tournament of provided id.
+	 * */
 	@GetMapping("admin/tournamentDetail/remove/{id}")
 	public String removeUser(@PathVariable int id) {
 		tournamentRepository.deleteById(id);
 		return "redirect:/admin/allTournament";
 	}
 
+	/** 
+	 * Below controller allows to display data concerning a select tournament and allows system administrator to
+	 * sign up players for a tournament.
+	 * */
 	@GetMapping("admin/tournamentDetail/attend/{id}")
 	public ModelAndView assignParticipant(@PathVariable int id, Model model) {
 		model.addAttribute("tournament", tournamentRepository.findById(id));
@@ -102,6 +122,9 @@ public class TournamentController {
 		return mav;
 	}
 
+	/** 
+	 * Below controller adds participant's email to a tournament creating a list of players participating in a tournament.
+	 * */
 	@PostMapping("admin/tournamentDetail/attend/")
 	public String processAssignParticipant(@ModelAttribute TournamentEmail tournamentEmail) {
 		int tournamentId = tournamentEmail.getTournamentId();
@@ -112,7 +135,6 @@ public class TournamentController {
 
 		tournamentParticipants.add(participantEmail);
 		tournament.setParticipant(tournamentParticipants);
-		System.out.println(tournamentParticipants.toString());
 		tournamentRepository.save(tournament);
 		return "redirect:/admin/allTournament";
 	}
