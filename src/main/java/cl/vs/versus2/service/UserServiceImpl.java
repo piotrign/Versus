@@ -23,6 +23,7 @@ import cl.vs.versus2.repository.UserRepository;
 @Service("userService")
 public class UserServiceImpl implements UserService {
 //TODO remove autowired injection and change to constructor injection
+	//TODO remove this test line
 	@PersistenceContext
 	EntityManager entityManager;
 
