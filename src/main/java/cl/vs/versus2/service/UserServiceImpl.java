@@ -26,6 +26,7 @@ public class UserServiceImpl implements UserService {
 	//TODO remove this test line
 	@PersistenceContext
 	EntityManager entityManager;
+	//nowy feature
 
 	@Autowired
 	private UserRepository userRepository;
